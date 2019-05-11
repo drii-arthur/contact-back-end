@@ -2,18 +2,19 @@ const express = require('express');
 const app = express();
 const db = require('./db')
 const bodyParser = require('body-parser');
+const Cors = require('cors')
 const port = process.env.PORT || 4000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(__dirname + './src'))
+app.use(Cors())
 
 app.listen(port, () => {
   console.log(`Server Started on port : ${port}`)
 })
 
-app.get('./', (req, res) => {
-  res.render('index.js')
+app.get('/', (req, res) => {
+  res.send(`<a href="http://localhost:4000/contacts" target="_blank">View Data</a>`)
 })
 
 app.get("/contacts", (req, res) => {
